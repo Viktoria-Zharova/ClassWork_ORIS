@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEARCH</title>
+</head>
+<body style="background-color: lightpink;">
+<div style="text-align: center;">
+    <h1>Search:</h1>
+
+    <form action="https://www.google.com/search" method="GET">
+        <label for="searchQuery"><p>Google:</p></label>
+        <input type="text" id="searchQuery" name="q" list="searchOptions" placeholder="Что вы ищете?" required>
+        <datalist id="searchOptions">
+            <option value="вконтакте">
+            <option value="ютуб">
+        </datalist>
+        <input type="submit" value="Поиск">
+    </form>
+
+    <form action="https://yandex.ru/search" method="GET">
+        <label for="yandexSearch" style="font-family: Arial, sans-serif;"><p>Яндекс:</p></label>
+        <input type="text" id="yandexSearch" name="text" placeholder="Что вы ищете?" required>
+        <input type="submit" value="Поиск">
+    </form>
+
+    <form action="https://www.bing.com/search" method="GET">
+        <label for="bingSearch" style="color: #FF5733; text-decoration: underline;"><p>Bing:</p></label>
+        <input type="text" id="bingSearch" name="q" placeholder="Что вы ищете?" required>
+        <input type="submit" value="Поиск">
+    </form>
+
+    <form action="https://search.yahoo.com/search" method="GET">
+        <label for="yahooSearch">
+                <span style="font-size: 35px;">
+                    <p><em>Yahoo:</em></p>
+                </span>
+        </label>
+        <input type="text" id="yahooSearch" name="p" placeholder="Что вы ищете?" required>
+        <input type="submit" value="Поиск">
+    </form>
+
+    <form action="https://duckduckgo.com" method="GET">
+        <label for="duckduckgoSearch">
+            <span style="font-size: 30px; color: #62ff17" >
+                <p>DuckDuckGo:</p>
+            </span>
+        </label>
+        <input type="text" id="duckduckgoSearch" name="q" placeholder="Что вы ищете?" required>
+        <input type="submit" value="Поиск">
+    </form>
+
+    <form action="https://www.baidu.com/s" method="GET">
+        <label for="baiduSearch"><p><mark>Baidu:</mark></p></label>
+        <input type="text" id="baiduSearch" name="wd" placeholder="Что вы ищете?" required>
+        <input type="submit" value="Поиск">
+    </form>
+
+    <form action="https://search.aol.com/aol/search" method="GET">
+        <label for="aolSearch"><p><img src="aol.jpg" width="100" height="50" ></p></label>
+        <input type="text" id="aolSearch" name="q" placeholder="Что вы ищете?" required>
+        <input type="submit" value="Поиск">
+    </form>
+
+    <form action="https://www.ask.com/web" method="GET">
+        <label for="askSearch"><p style="font-size: 25px"><strike>Ask.com:</strike></p></label>
+        <input type="text" id="askSearch" name="q" placeholder="Что вы ищете?" required>
+        <input type="submit" value="Поиск">
+    </form>
+
+    <form action="https://yandex.ru/images/search" method="GET">
+        <label for="yandexImages"><p style="color: #ff7f13; font-size: 25px"><em>Yandex Images:</em><img src="kitty.jpg" width="150" height="100"></p></label>
+        <input type="text" id="yandexImages" name="text" placeholder="Что вы ищете?" required>
+        <input type="submit" value="Поиск">
+    </form>
+
+</div>
+</body>
+</html>
