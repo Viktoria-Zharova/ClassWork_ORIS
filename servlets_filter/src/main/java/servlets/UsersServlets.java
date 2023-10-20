@@ -1,28 +1,33 @@
 package servlets;
 
-import models.User;
 import repository.UsersRepository;
 import repository.UsersRepositoryJdbcImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 
-@WebServlet("/login")
-public class AuthenticationServlet extends HttpServlet {
+@WebServlet("/users")
+public class UsersServlets extends HttpServlet {
+
     private static final String DB_USER = "postgres";
     private static final String DB_PASSWORD = "Ktcrjdf65";
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/test_db";
 
     private UsersRepository usersRepository;
 
+
     @Override
     public void init() throws ServletException {
+
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
@@ -36,30 +41,19 @@ public class AuthenticationServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
     }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
-    }
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
 
-        Optional<User> user;
-        user = usersRepository.findByLogin(User.builder()
-                .username(username)
-                .password(password)
-                .build());
-
-
-        if (user.isPresent()) {
-            HttpSession httpSession = request.getSession(true);
-            httpSession.setAttribute("authenticated", true);
-            response.sendRedirect("/users");
-        } else {
-            response.sendRedirect("/login");
-            }
+        List result;
+        try {
+            result = usersRepository.findAllByAge();
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
         }
+        request.setAttribute("usersForJsp", result);
+        request.getRequestDispatcher("/jsp/users.jsp").forward(request, response);
+    }
 }

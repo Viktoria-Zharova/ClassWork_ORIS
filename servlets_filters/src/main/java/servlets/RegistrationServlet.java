@@ -44,6 +44,7 @@ public class RegistrationServlet extends HttpServlet {
         request.getRequestDispatcher("/jsp/register.jsp").forward(request, response);
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String firstName = request.getParameter("firstName");
         String secondName = request.getParameter("secondName");

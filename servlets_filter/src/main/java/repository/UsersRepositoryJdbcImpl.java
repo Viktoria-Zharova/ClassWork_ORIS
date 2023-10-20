@@ -1,6 +1,7 @@
 package repository;
 
 import models.User;
+import repository.UsersRepository;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -38,6 +39,9 @@ public class UsersRepositoryJdbcImpl implements UsersRepository {
                         .username(resultSet.getString("username"))
                         .build();
                 result.add(user);
+//                if (user.getAge().equals(age)) {
+//                    result.add(user);
+//                }
             }
             return result;
         } catch (SQLException e) {

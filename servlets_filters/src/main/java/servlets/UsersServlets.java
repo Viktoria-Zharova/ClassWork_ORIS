@@ -25,6 +25,7 @@ public class UsersServlets extends HttpServlet {
     private UsersRepository usersRepository;
 
 
+    //    private List<User> users;
     @Override
     public void init() throws ServletException {
 
@@ -41,7 +42,6 @@ public class UsersServlets extends HttpServlet {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     @Override

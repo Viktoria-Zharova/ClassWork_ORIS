@@ -24,7 +24,6 @@
 </div>
 
 <%
-    // Display error message if there is one
     String error = (String) request.getAttribute("error");
     if (error != null) {
 %>

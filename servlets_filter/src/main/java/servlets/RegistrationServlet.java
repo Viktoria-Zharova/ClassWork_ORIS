@@ -6,15 +6,17 @@ import repository.UsersRepositoryJdbcImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.*;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-@WebServlet("/login")
-public class AuthenticationServlet extends HttpServlet {
+@WebServlet("/register")
+public class RegistrationServlet extends HttpServlet {
     private static final String DB_USER = "postgres";
     private static final String DB_PASSWORD = "Ktcrjdf65";
     private static final String DB_URL = "jdbc:postgresql://localhost:5432/test_db";
@@ -39,27 +41,28 @@ public class AuthenticationServlet extends HttpServlet {
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        request.getRequestDispatcher("jsp/login.jsp").forward(request, response);
+        request.getRequestDispatcher("/jsp/register.jsp").forward(request, response);
     }
-    @Override
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String firstName = request.getParameter("firstName");
+        String secondName = request.getParameter("secondName");
+        String ageString = request.getParameter("age");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
-        Optional<User> user;
-        user = usersRepository.findByLogin(User.builder()
+        int age = Integer.parseInt(ageString);
+
+        User newUser = User.builder()
+                .firstName(firstName)
+                .secondName(secondName)
+                .age(age)
                 .username(username)
                 .password(password)
-                .build());
+                .build();
 
-
-        if (user.isPresent()) {
-            HttpSession httpSession = request.getSession(true);
-            httpSession.setAttribute("authenticated", true);
-            response.sendRedirect("/users");
-        } else {
-            response.sendRedirect("/login");
-            }
-        }
+        usersRepository.save(newUser);
+        // Redirect to login page after registration
+        response.sendRedirect("login");
+    }
 }
